@@ -58,6 +58,8 @@ body {
     overflow-y: auto;
     position: relative;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
 }
 
 /* --- SPLASH SCREEN --- */
@@ -241,12 +243,12 @@ body {
 .header-badge {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
     backdrop-filter: blur(4px);
 }
@@ -318,7 +320,7 @@ body {
 
 /* --- MAIN CONTENTS --- */
 .app-main {
-    padding: 24px 16px 16px 16px;
+    padding: 20px 16px 20px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -328,7 +330,7 @@ body {
 .intro-card, .step-card {
     background-color: var(--card-bg);
     border-radius: var(--radius-md);
-    padding: 20px 14px;
+    padding: 24px 16px;
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border-color);
 }

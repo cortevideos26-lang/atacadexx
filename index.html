@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atacadão - Campanha Premiada Oficial</title>
+    <meta name="theme-color" content="#1a9859">
+    <!-- Google Fonts Ubuntu (mesma fonte do site oficial do Atacadão) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-logo-box">
+                <img src="atacadao_logo.svg" alt="Atacadão Logo" class="splash-logo">
+            </div>
+            <div class="splash-checks">
+                <div class="splash-check-item">
+                    <span class="splash-check-icon">✓</span>
+                    <span>Seguro</span>
+                </div>
+                <div class="splash-check-item">
+                    <span class="splash-check-icon">✓</span>
+                    <span>Confiável</span>
+                </div>
+                <div class="splash-check-item">
+                    <span class="splash-check-icon">✓</span>
+                    <span>Oficial</span>
+                </div>
+            </div>
+            <div class="splash-spinner"></div>
+            <p class="splash-text">Aguarde...</p>
+        </div>
+    </div>
+
+    <!-- Main simulator container to center on desktop and look like a real mobile app -->
+    <div class="app-container" id="appContainer">
+        
+        <!-- Header: Estilo Atacadão real - verde com logo e navegação -->
+        <header class="app-header">
+            <div class="header-top-bar">
+                <div class="header-top-content">
+                    <span class="header-top-text">Confira as ofertas do Atacadão perto de você!</span>
+                    <a href="https://www.atacadao.com.br/institucional/nossas-lojas" target="_blank" rel="noopener" class="header-top-link">Nossas Lojas</a>
+                </div>
+            </div>
+            <div class="header-main">
+                <div class="header-content">
+                    <div class="logo-wrapper">
+                        <img src="atacadao_logo.svg" alt="Atacadão Logo" class="brand-logo" id="brandLogo">
+                    </div>
+                    <div class="header-actions">
+                        <div class="header-badge">
+                            <span class="badge-dot"></span>
+                            <span class="badge-text">Campanha Oficial</span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="#" class="nav-link">Início</a>
+                    <a href="#" class="nav-link">Folhetos</a>
+                    <a href="#" class="nav-link">Cartão Atacadão</a>
+                    <a href="#" class="nav-link">Atendimento</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 1: THE ROULETTE WHEEL -->
+        <!-- ============================================== -->
+        <div class="screen-view active" id="screen-wheel">
+            <main class="app-main">
+                <!-- Sweepstakes Headline & Intro Card -->
+                <section class="intro-card">
+                    <h1 class="main-title">Roleta de Prêmios <br><span class="highlight">Aniversário Atacadão</span></h1>
+                    <p class="subtitle">Complete os giros e ganhe vale-compras instantâneos de até <strong>R$ 520,00</strong>!</p>
+                    
+                    <!-- Attempts Tracker -->
+                    <div class="attempts-tracker">
+                        <span class="tracker-label">Suas Tentativas:</span>
+                        <span class="tracker-count" id="trackerCount">3 restantes</span>
+                    </div>
+                </section>
+
+                <!-- Game Section with Roulette -->
+                <section class="game-section">
+                    <div class="roulette-container">
+                        <!-- Pointer indicating selected wedge -->
+                        <div class="roulette-pointer"></div>
+                        <!-- Roulette Canvas -->
+                        <canvas id="rouletteWheel" width="360" height="360"></canvas>
+                        <!-- Center Spin Button -->
+                        <button class="spin-button" id="spinBtn">
+                            <span class="spin-text">GIRAR</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Information Card -->
+                <section class="info-card">
+                    <div class="info-icon">🎁</div>
+                    <div class="info-text">
+                        <p class="info-desc">Promoção autorizada nacionalmente. Vales-compra válidos para qualquer loja Atacadão.</p>
+                        <div class="validity-badge">
+                            <span class="validity-label">Oferta válida até:</span>
+                            <span class="validity-date">25/06/2026</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 2: DATA REGISTRATION FORM -->
+        <!-- ============================================== -->
+        <div class="screen-view" id="screen-form">
+            <main class="app-main">
+                <section class="step-card">
+                    <div class="step-header">
+                        <span class="step-badge">Passo 2 de 4</span>
+                        <h2 class="step-title">Insira Seus Dados</h2>
+                        <p class="step-desc">Precisamos desses dados para gerar e autenticar seu <span class="highlight-green">Vale-Compra Premiado</span>.</p>
+                    </div>
+
+                    <!-- Resgatar Prêmio Form -->
+                    <form class="claim-form" id="claimForm">
+                        <div class="input-group">
+                            <label for="claimName">Nome Completo</label>
+                            <input type="text" id="claimName" required placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="input-group">
+                            <label for="claimCpf">CPF</label>
+                            <input type="text" id="claimCpf" required placeholder="000.000.000-00" maxlength="14">
+                        </div>
+                        <div class="input-group">
+                            <label for="claimEmail">E-mail para Recebimento</label>
+                            <input type="email" id="claimEmail" required placeholder="exemplo@email.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="claimPhone">Telefone / WhatsApp</label>
+                            <input type="tel" id="claimPhone" required placeholder="(11) 99999-9999" maxlength="15">
+                        </div>
+                        <div class="security-note">
+                            <span class="lock-icon">🔒</span>
+                            <span>Seus dados estão protegidos sob a LGPD e criptografados em ambiente seguro.</span>
+                        </div>
+                        <button type="submit" class="modal-btn win-btn" id="submitFormBtn">Confirmar Dados</button>
+                    </form>
+                </section>
+            </main>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 3: VERIFICATION LOADING SCREEN -->
+        <!-- ============================================== -->
+        <div class="screen-view" id="screen-loading">
+            <main class="app-main">
+                <section class="step-card loading-card">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="loading-dot"></div>
+                    </div>
+                    <div id="loadingCheck" class="loading-check hidden">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#1a9859" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h2 class="loading-title" id="loadingTitle">Aguarde...</h2>
+                    <div class="loading-steps" id="loadingSteps">
+                        <div class="loading-step" data-step="1">
+                            <span class="step-check">◻</span>
+                            <span>Vinculando voucher ao CPF</span>
+                        </div>
+                        <div class="loading-step" data-step="2">
+                            <span class="step-check">◻</span>
+                            <span>Acessando sistema de validação</span>
+                        </div>
+                        <div class="loading-step" data-step="3">
+                            <span class="step-check">◻</span>
+                            <span>Organizando tudo para você</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 4: WHATSAPP SHARING SCREEN -->
+        <!-- ============================================== -->
+        <div class="screen-view" id="screen-share">
+            <main class="app-main">
+                <section class="step-card share-card">
+                    <div class="share-header">
+                        <div class="share-header-icon">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <h2 class="step-title">Compartilhe e Ganhe!</h2>
+                        <p class="step-desc">Compartilhe o link com <strong>pelo menos 3 amigos</strong> e poste no <strong>Status do WhatsApp</strong> para liberar seu Vale-Compra.</p>
+                    </div>
+
+                    <div class="share-whatsapp-card">
+                        <button class="share-whatsapp-btn" id="shareWhatsAppBtn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                            Compartilhar no WhatsApp
+                        </button>
+                        <p class="share-hint">Toque no botão, escolha os contatos e compartilhe. Volte aqui após cada compartilhamento.</p>
+                    </div>
+
+                    <div class="share-steps">
+                        <div class="share-step-item" id="chk-share-count">
+                            <span class="share-step-icon">👥</span>
+                            <span class="share-step-label">Compartilhado com amigos</span>
+                            <span class="share-step-badge" id="shareCountBadge">0/3</span>
+                        </div>
+                        <div class="share-step-item" id="chk-share-status">
+                            <span class="share-step-icon">📢</span>
+                            <span class="share-step-label">Postado no Status</span>
+                            <span class="share-step-badge" id="shareStatusBadge">✗</span>
+                        </div>
+                    </div>
+
+                    <div class="share-progress-wrapper">
+                        <div class="share-progress-bar">
+                            <div class="share-progress-fill" id="shareProgressFill"></div>
+                        </div>
+                        <span class="share-progress-text" id="shareProgressText">Progresso: 0 de 4</span>
+                    </div>
+
+                    <button class="modal-btn success-btn disabled" id="finalizeBtn" disabled>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        Resgatar Vale-Compra
+                    </button>
+                </section>
+            </main>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SHARED COMPONENT: FACEBOOK COMMENTS SECTION -->
+        <!-- (Visible on Screen 1, Screen 2 and Screen 4) -->
+        <!-- ============================================== -->
+        <section class="fb-comments-section" id="fbCommentsBlock">
+            <div class="fb-comments-header">
+                <span class="fb-comments-count">37 comentários</span>
+                <span class="fb-comments-sort">Ordenar por: Mais relevantes</span>
+            </div>
+
+            <div class="fb-comments-list" id="fbCommentsList">
+
+                <!-- Comment 1 -->
+                <div class="fb-comment">
+                    <div class="fb-avatar avatar-1">M</div>
+                    <div class="fb-comment-content">
+                        <div class="fb-comment-bubble">
+                            <div class="fb-comment-author">Mariana Menezes</div>
+                            <div class="fb-comment-text">Gente, que surpresa boa!! Fiz aqui e acabei de receber o vale de 250 no meu e-mail!! Já vou fazer a feira da semana no Atacadão daqui de Campinas. Valeu demais Atacadão!! 👏👏</div>
+                        </div>
+                        <div class="fb-comment-actions">
+                            <span class="fb-action-btn active">Curtir</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-action-btn">Responder</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-time">há 3 min</span>
+                            <div class="fb-likes-badge">
+                                <span class="fb-likes-icon">👍</span>
+                                <span class="fb-likes-count">19</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment 2 -->
+                <div class="fb-comment">
+                    <div class="fb-avatar avatar-2">R</div>
+                    <div class="fb-comment-content">
+                        <div class="fb-comment-bubble">
+                            <div class="fb-comment-author">Ricardo Santos</div>
+                            <div class="fb-comment-text">O meu também deu certo!! Chegou o código em menos de 10 min. Já passei no caixa do Atacadão da Marginal Tietê e passou certinho de primeira. Podem fazer sem medo.</div>
+                        </div>
+                        <div class="fb-comment-actions">
+                            <span class="fb-action-btn">Curtir</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-action-btn">Responder</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-time">há 12 min</span>
+                            <div class="fb-likes-badge">
+                                <span class="fb-likes-icon">👍</span>
+                                <span class="fb-likes-count">12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment 3 (With reply) -->
+                <div class="fb-comment has-reply">
+                    <div class="fb-avatar avatar-3">C</div>
+                    <div class="fb-comment-content">
+                        <div class="fb-comment-bubble">
+                            <div class="fb-comment-author">Carla Souza</div>
+                            <div class="fb-comment-text">Tem que compartilhar mesmo com os contatos para liberar? Alguém me tira essa dúvida por favor.</div>
+                        </div>
+                        <div class="fb-comment-actions">
+                            <span class="fb-action-btn">Curtir</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-action-btn">Responder</span>
+                            <span class="fb-dot">•</span>
+                            <span class="fb-time">há 24 min</span>
+                            <div class="fb-likes-badge">
+                                <span class="fb-likes-icon">👍</span>
+                                <span class="fb-likes-count">4</span>
+                            </div>
+                        </div>
+
+                        <!-- Reply -->
+                        <div class="fb-reply">
+                            <div class="fb-avatar avatar-4">F</div>
+                            <div class="fb-comment-content">
+                                <div class="fb-comment-bubble">
+                                    <div class="fb-comment-author">Felipe Neto de Oliveira</div>
+                                    <div class="fb-comment-text">Tem sim Carla! Eu acabei de fazer, compartilhei com os amigos e abriu o botão de resgatar na hora. Super rápido.</div>
+                                </div>
+                                <div class="fb-comment-actions">
+                                    <span class="fb-action-btn">Curtir</span>
+                                    <span class="fb-dot">•</span>
+                                    <span class="fb-action-btn">Responder</span>
+                                    <span class="fb-dot">•</span>
+                                    <span class="fb-time">há 18 min</span>
+                                    <div class="fb-likes-badge">
+                                        <span class="fb-likes-icon">👍</span>
+                                        <span class="fb-likes-count">8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden comments (toggled by "Ver mais") -->
+                <div class="fb-comments-hidden" id="fbHiddenComments">
+                    <!-- Comment 4 -->
+                    <div class="fb-comment">
+                        <div class="fb-avatar avatar-5">J</div>
+                        <div class="fb-comment-content">
+                            <div class="fb-comment-bubble">
+                                <div class="fb-comment-author">Julia Alves</div>
+                                <div class="fb-comment-text">Adorei a roleta, tirei o vale de R$ 250. Meu marido também fez e ganhou R$ 100 de desconto. O Atacadão sempre salvando nossas compras de mês! 😍</div>
+                            </div>
+                            <div class="fb-comment-actions">
+                                <span class="fb-action-btn">Curtir</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-action-btn">Responder</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-time">há 45 min</span>
+                                <div class="fb-likes-badge">
+                                    <span class="fb-likes-icon">👍</span>
+                                    <span class="fb-likes-count">15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment 5 -->
+                    <div class="fb-comment">
+                        <div class="fb-avatar avatar-1">E</div>
+                        <div class="fb-comment-content">
+                            <div class="fb-comment-bubble">
+                                <div class="fb-comment-author">Eduardo Lima</div>
+                                <div class="fb-comment-text">Funciona mesmo!! No começo fiquei com o pé atrás mas fui lá e fiz. Ganhei R$ 520 de vale-compra!! Minha esposa já está fazendo também kkkk</div>
+                            </div>
+                            <div class="fb-comment-actions">
+                                <span class="fb-action-btn active">Curtir</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-action-btn">Responder</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-time">há 1 h</span>
+                                <div class="fb-likes-badge">
+                                    <span class="fb-likes-icon">👍</span>
+                                    <span class="fb-likes-count">23</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment 6 -->
+                    <div class="fb-comment">
+                        <div class="fb-avatar avatar-2">T</div>
+                        <div class="fb-comment-content">
+                            <div class="fb-comment-bubble">
+                                <div class="fb-comment-author">Tatiane Gomes</div>
+                                <div class="fb-comment-text">Alguém sabe se vale para qualquer loja? Moro em Ribeirão Preto e queria saber se aceita aqui.</div>
+                            </div>
+                            <div class="fb-comment-actions">
+                                <span class="fb-action-btn active">Curtir</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-action-btn">Responder</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-time">há 2 h</span>
+                                <div class="fb-likes-badge">
+                                    <span class="fb-likes-icon">👍</span>
+                                    <span class="fb-likes-count">6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment 7 -->
+                    <div class="fb-comment has-reply">
+                        <div class="fb-avatar avatar-4">P</div>
+                        <div class="fb-comment-content">
+                            <div class="fb-comment-bubble">
+                                <div class="fb-comment-author">Patrícia Oliveira</div>
+                                <div class="fb-comment-text">Acabei de ganhar!! Meu filho que viu o link e me mandou. Não acreditei até ver o código no e-mail. Muito obrigada Atacadão!! ❤️</div>
+                            </div>
+                            <div class="fb-comment-actions">
+                                <span class="fb-action-btn">Curtir</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-action-btn">Responder</span>
+                                <span class="fb-dot">•</span>
+                                <span class="fb-time">há 1 h</span>
+                                <div class="fb-likes-badge">
+                                    <span class="fb-likes-icon">👍</span>
+                                    <span class="fb-likes-count">18</span>
+                                </div>
+                            </div>
+
+                            <!-- Reply -->
+                            <div class="fb-reply">
+                                <div class="fb-avatar avatar-5">C</div>
+                                <div class="fb-comment-content">
+                                    <div class="fb-comment-bubble">
+                                        <div class="fb-comment-author">Carla Souza</div>
+                                        <div class="fb-comment-text">Parabéns Patrícia!! Também consegui aqui, siga o passo a passo que dá certo sim!</div>
+                                    </div>
+                                    <div class="fb-comment-actions">
+                                        <span class="fb-action-btn">Curtir</span>
+                                        <span class="fb-dot">•</span>
+                                        <span class="fb-action-btn">Responder</span>
+                                        <span class="fb-dot">•</span>
+                                        <span class="fb-time">há 45 min</span>
+                                        <div class="fb-likes-badge">
+                                            <span class="fb-likes-icon">👍</span>
+                                            <span class="fb-likes-count">5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="fb-show-more" id="fbShowMore">Ver mais comentários (34)</button>
+        </section>
+
+        <!-- Footer minimalista -->
+        <footer class="app-footer">
+            <div class="footer-inner">
+                <div class="footer-top">
+                    <img src="atacadao_logo.svg" alt="Atacadão Logo" class="footer-logo">
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/atacadao/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/Atacadao/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@AtacadaoOficial" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-legal">
+                    <span class="footer-cnpj">ATACADÃO S.A. | CNPJ: 75.315.333/0001-09</span>
+                    <span class="footer-copyright">© 2026 Atacadão. Todos os direitos reservados.</span>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Modal 1: Quase lá! (Fails) -->
+        <div class="modal-overlay" id="failModal">
+            <div class="modal-card">
+                <div class="modal-icon fail">❌</div>
+                <h3 class="modal-title" id="failTitle">Não foi dessa vez!</h3>
+                <p class="modal-message" id="failMsg">Você acertou a fatia de "Tente Novamente". Não desanime!</p>
+                <button class="modal-btn" id="failBtn">Tentar Novamente</button>
+            </div>
+        </div>
+
+        <!-- Modal 2: Vitória! (Transition trigger) -->
+        <div class="modal-overlay" id="winModal">
+            <div class="modal-card win-card">
+                <div class="confetti-container" id="confettiContainer"></div>
+                <div class="modal-icon win">🎉</div>
+                <h3 class="modal-title">Você Ganhou!</h3>
+                <p class="modal-message">Parabéns! Você ganhou um <strong>Vale-Compra</strong> no Atacadão! Siga os próximos passos para resgatar.</p>
+                <button class="modal-btn win-btn" id="goToFormBtn">Resgatar Vale-Compra</button>
+            </div>
+        </div>
+
+        <!-- Modal 3: Sucesso Final (Claim Registered) -->
+        <div class="modal-overlay" id="successModal">
+            <div class="modal-card success-card">
+                <div class="modal-icon success">✔</div>
+                <h3 class="modal-title">Solicitação Enviada!</h3>
+                <p class="modal-message">Parabéns! Seus compartilhamentos foram confirmados. Um atendente do nosso suporte vai entrar em contato em até <strong>24 horas</strong> para enviar seu resgate.</p>
+                <p class="success-hint">Fique atento ao WhatsApp e e-mail cadastrados.</p>
+                <button class="modal-btn success-btn" id="successBtn">Finalizar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Winner notifications toast -->
+    <div class="winner-toast-container" id="winnerToast"></div>
+
+    <!-- Hidden iframe for Google Sheets form submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+
+    <!-- JS Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
